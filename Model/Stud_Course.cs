@@ -16,5 +16,8 @@ namespace EF_Asmnt2.Model
         [Range(0,100)]
         public int Grade { get; set; }
 
+        public Student Student { get; set; }
+        public Course Course { get; set; }
+
     }
 }

@@ -14,5 +14,8 @@ namespace EF_Asmnt2.Model
 
         [Range(1,10)]
         public int Evaluate { get; set; }
+
+        public Instructor Instructor { get; set; }
+        public Course Course { get; set; }
     }
 }

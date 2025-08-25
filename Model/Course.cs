@@ -23,6 +23,13 @@ namespace EF_Asmnt2.Model
         [Required]
         public int Top_Id { get; set; }
 
+        public Topic Topic { get; set; }
+
+        public ICollection<Course_Inst> Course_Insts { get; set; } = new HashSet<Course_Inst>();
+
+
+        public ICollection<Stud_Course> Stud_Courses { get; set; }
+
 
     }
 }

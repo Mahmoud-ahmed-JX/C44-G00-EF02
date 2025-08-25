@@ -12,8 +12,8 @@ namespace EF_Asmnt2.Configrations
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Department> builder)
         {
-            builder.HasOne<Instructor>()
-                .WithOne()
+            builder.HasOne(D=>D.Instructor)
+                .WithOne(I=>I.Department)
                 .HasForeignKey<Department>(D=>D.Ins_Id)
                 .OnDelete(DeleteBehavior.NoAction);
            

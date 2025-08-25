@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EF_Asmnt2.Migrations
 {
     /// <inheritdoc />
-    public partial class CascadeNoActionUpdate : Migration
+    public partial class FixRelations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

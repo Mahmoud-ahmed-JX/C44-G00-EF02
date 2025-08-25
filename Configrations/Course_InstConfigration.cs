@@ -15,13 +15,13 @@ namespace EF_Asmnt2.Configrations
         {
             builder.HasKey(CI => new {CI.Inst_Id, CI.Course_Id });
 
-            builder.HasOne<Instructor>()
-                .WithMany()
+            builder.HasOne(CI=>CI.Instructor)
+                .WithMany(I=> I.Course_Insts)
                 .HasForeignKey(CI => CI.Inst_Id)
                 .OnDelete(DeleteBehavior.Restrict);
            
-            builder.HasOne<Course>()
-                .WithMany()
+            builder.HasOne(CI=>CI.Course)
+                .WithMany(C=>C.Course_Insts)
                 .HasForeignKey(CI => CI.Course_Id)
                 .OnDelete(DeleteBehavior.Restrict);
         }

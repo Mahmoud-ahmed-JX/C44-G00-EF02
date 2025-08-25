@@ -15,6 +15,10 @@ namespace EF_Asmnt2.Model
         public string Name { get; set; }
         
         public int Ins_Id { get; set; }
+
+       public ICollection<Student> Students { get; set; } = new HashSet<Student>();
+        public ICollection<Instructor> Instructors { get; set; }
+        public Instructor Instructor { get; set; }
         [Required]
         public DateOnly HiringDate { get; set; }
     }

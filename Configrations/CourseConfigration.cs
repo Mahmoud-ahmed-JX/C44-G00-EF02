@@ -14,8 +14,8 @@ namespace EF_Asmnt2.Configrations
         public void Configure(EntityTypeBuilder<Course> builder)
         {
             builder.HasIndex(C=>C.Name).IsUnique();
-            builder.HasOne<Topic>()
-                 .WithMany()
+            builder.HasOne(C=>C.Topic)
+                 .WithMany(T=>T.Courses)
                  .HasForeignKey(C=>C.Top_Id)
                  .OnDelete(DeleteBehavior.NoAction);
         }

@@ -30,5 +30,10 @@ namespace EF_Asmnt2.Model
         public decimal HourRateBonus { get; set; }
         [Required]
         public int Dep_Id { get; set; }
+        public Department Department { get; set; }
+
+        public Department DepartmentManages { get; set; }
+
+        public ICollection<Course_Inst> Course_Insts { get; set; } = new HashSet<Course_Inst>();
     }
 }

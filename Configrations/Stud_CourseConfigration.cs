@@ -15,15 +15,15 @@ namespace EF_Asmnt2.Configrations
         public void Configure(EntityTypeBuilder<Stud_Course> builder)
         {
             builder.HasKey(Sc => new { Sc.Stud_Id, Sc.Course_Id });
-            builder.HasOne<Student>()
-                 .WithMany()
+            builder.HasOne(Sc=>Sc.Student)
+                 .WithMany(S=>S.Stud_Courses)
                  .HasForeignKey(st => st.Stud_Id)
                  .OnDelete(DeleteBehavior.Restrict)
                  ;
 
 
-            builder.HasOne<Course>()
-                 .WithMany()
+            builder.HasOne(Sc=>Sc.Course)
+                 .WithMany(C=>C.Stud_Courses)
                  .HasForeignKey(cr => cr.Course_Id)
                  .OnDelete(DeleteBehavior.Restrict);
 

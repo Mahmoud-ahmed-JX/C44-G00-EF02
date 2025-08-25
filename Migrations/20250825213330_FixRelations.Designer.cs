@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EF_Asmnt2.Migrations
 {
     [DbContext(typeof(ItiDbContext))]
-    [Migration("20250822174113_CascadeNoActionUpdate")]
-    partial class CascadeNoActionUpdate
+    [Migration("20250825213330_FixRelations")]
+    partial class FixRelations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -217,68 +217,116 @@ namespace EF_Asmnt2.Migrations
 
             modelBuilder.Entity("EF_Asmnt2.Model.Course", b =>
                 {
-                    b.HasOne("EF_Asmnt2.Model.Topic", null)
-                        .WithMany()
+                    b.HasOne("EF_Asmnt2.Model.Topic", "Topic")
+                        .WithMany("Courses")
                         .HasForeignKey("Top_Id")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Topic");
                 });
 
             modelBuilder.Entity("EF_Asmnt2.Model.Course_Inst", b =>
                 {
-                    b.HasOne("EF_Asmnt2.Model.Course", null)
-                        .WithMany()
+                    b.HasOne("EF_Asmnt2.Model.Course", "Course")
+                        .WithMany("Course_Insts")
                         .HasForeignKey("Course_Id")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("EF_Asmnt2.Model.Instructor", null)
-                        .WithMany()
+                    b.HasOne("EF_Asmnt2.Model.Instructor", "Instructor")
+                        .WithMany("Course_Insts")
                         .HasForeignKey("Inst_Id")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Instructor");
                 });
 
             modelBuilder.Entity("EF_Asmnt2.Model.Department", b =>
                 {
-                    b.HasOne("EF_Asmnt2.Model.Instructor", null)
-                        .WithOne()
+                    b.HasOne("EF_Asmnt2.Model.Instructor", "Instructor")
+                        .WithOne("Department")
                         .HasForeignKey("EF_Asmnt2.Model.Department", "Ins_Id")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Instructor");
                 });
 
             modelBuilder.Entity("EF_Asmnt2.Model.Instructor", b =>
                 {
-                    b.HasOne("EF_Asmnt2.Model.Department", null)
-                        .WithMany()
+                    b.HasOne("EF_Asmnt2.Model.Department", "DepartmentManages")
+                        .WithMany("Instructors")
                         .HasForeignKey("Dep_Id")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("DepartmentManages");
                 });
 
             modelBuilder.Entity("EF_Asmnt2.Model.Stud_Course", b =>
                 {
-                    b.HasOne("EF_Asmnt2.Model.Course", null)
-                        .WithMany()
+                    b.HasOne("EF_Asmnt2.Model.Course", "Course")
+                        .WithMany("Stud_Courses")
                         .HasForeignKey("Course_Id")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("EF_Asmnt2.Model.Student", null)
-                        .WithMany()
+                    b.HasOne("EF_Asmnt2.Model.Student", "Student")
+                        .WithMany("Stud_Courses")
                         .HasForeignKey("Stud_Id")
                         .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("EF_Asmnt2.Model.Student", b =>
+                {
+                    b.HasOne("EF_Asmnt2.Model.Department", "Department")
+                        .WithMany("Students")
+                        .HasForeignKey("Dep_Id")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("EF_Asmnt2.Model.Course", b =>
+                {
+                    b.Navigation("Course_Insts");
+
+                    b.Navigation("Stud_Courses");
+                });
+
+            modelBuilder.Entity("EF_Asmnt2.Model.Department", b =>
+                {
+                    b.Navigation("Instructors");
+
+                    b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("EF_Asmnt2.Model.Instructor", b =>
+                {
+                    b.Navigation("Course_Insts");
+
+                    b.Navigation("Department")
                         .IsRequired();
                 });
 
             modelBuilder.Entity("EF_Asmnt2.Model.Student", b =>
                 {
-                    b.HasOne("EF_Asmnt2.Model.Department", null)
-                        .WithMany()
-                        .HasForeignKey("Dep_Id")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                    b.Navigation("Stud_Courses");
+                });
+
+            modelBuilder.Entity("EF_Asmnt2.Model.Topic", b =>
+                {
+                    b.Navigation("Courses");
                 });
 #pragma warning restore 612, 618
         }

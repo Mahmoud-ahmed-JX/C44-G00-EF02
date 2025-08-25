@@ -25,5 +25,8 @@ namespace EF_Asmnt2.Model
 
         [Required]
         public int Dep_Id { get; set; }
+        public Department Department { get; set; }
+
+        public ICollection<Stud_Course> Stud_Courses { get; set; }
     }
 }
