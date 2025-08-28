@@ -14,7 +14,7 @@ namespace EF_Asmnt2.Model
         [MaxLength(100)]
         public string Name { get; set; }
         
-        public int Ins_Id { get; set; }
+        public int? Ins_Id { get; set; }
 
        public ICollection<Student> Students { get; set; } = new HashSet<Student>();
         public ICollection<Instructor> Instructors { get; set; }

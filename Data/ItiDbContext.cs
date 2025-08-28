@@ -19,15 +19,15 @@ namespace EF_Asmnt2.Data
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
-        DbSet<Student> Students { get; set; }
-        DbSet<Course> Courses { get; set; }
-        DbSet<Department> Departments { get; set; }
+       public DbSet<Student> Students { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Department> Departments { get; set; }
         
-        DbSet<Instructor> Instructors { get; set; }
+        public DbSet<Instructor> Instructors { get; set; }
 
-        DbSet<Topic> Topics { get; set; }
-        DbSet<Stud_Course> St_Crs { get; set; }
-        DbSet<Course_Inst> Crs_Ins { get; set; }
+        public DbSet<Topic> Topics { get; set; }
+        public DbSet<Stud_Course> St_Crs { get; set; }
+        public DbSet<Course_Inst> Crs_Ins { get; set; }
         
     }
 }
